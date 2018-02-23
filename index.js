@@ -16,10 +16,30 @@ db
 	.doc('eventOne')
 	.set({
 		name: 'newEventOne',
-		date: new Date(12, 2, 21),
+		date: new Date(2018, 2, 21),
 	});
 
 let response = '';
+
+const monthDefine = monthDig => {
+	const russianMonths = {
+		0: 'января',
+		1: 'февраля',
+		2: 'марта',
+		3: 'апреля',
+		4: 'мая',
+		5: 'июня',
+		6: 'июля',
+		7: 'августа',
+		8: 'сентября',
+		9: 'октября',
+		10: 'ноября',
+		11: 'декабря',
+	};
+	for (let [key, value] of Object.entries(russianMonths)) {
+		if (key == monthDig) return value;
+	}
+};
 
 db
 	.collection('events')
@@ -27,8 +47,9 @@ db
 	.then(snapshot => {
 		snapshot.forEach(doc => {
 			response += `
-      ${doc.data().name}\n
-      ${doc.data().date}
+      ${doc.data().name} => ${doc.data().date.getDate()} ${monthDefine(
+				doc.data().date.getMonth()
+			)} ${doc.data().date.getFullYear()} года
       `;
 		});
 	})
