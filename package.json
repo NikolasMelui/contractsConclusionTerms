@@ -4,7 +4,7 @@
 	"description": "Testing nodejs and firebase.",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "node_modules/.bin/nodemon index.js "
 	},
 	"repository": {
 		"type": "git",
@@ -17,6 +17,8 @@
 	},
 	"homepage": "https://github.com/NikolasMelui/koa-firebase-test#readme",
 	"dependencies": {
+		"firebase-admin": "^5.9.0",
+		"firebase-functions": "^0.8.1",
 		"koa-body": "^2.5.0",
 		"koa-morgan": "^1.0.1",
 		"koa-router": "^7.4.0",
