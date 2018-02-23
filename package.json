@@ -1,28 +1,29 @@
 {
-  "name": "koa-firebase-test",
-  "version": "0.1.0",
-  "description": "Testing nodejs and firebase.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NikolasMelui/koa-firebase-test.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/NikolasMelui/koa-firebase-test/issues"
-  },
-  "homepage": "https://github.com/NikolasMelui/koa-firebase-test#readme",
-  "dependencies": {
-    "koa-body": "^2.5.0",
-    "koa-morgan": "^1.0.1",
-    "koa-router": "^7.4.0",
-    "koa-static": "^4.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^1.15.1"
-  }
+	"name": "koa-firebase-test",
+	"version": "0.1.0",
+	"description": "Testing nodejs and firebase.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NikolasMelui/koa-firebase-test.git"
+	},
+	"author": "nikolasmelui",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/NikolasMelui/koa-firebase-test/issues"
+	},
+	"homepage": "https://github.com/NikolasMelui/koa-firebase-test#readme",
+	"dependencies": {
+		"koa-body": "^2.5.0",
+		"koa-morgan": "^1.0.1",
+		"koa-router": "^7.4.0",
+		"koa-static": "^4.0.2"
+	},
+	"devDependencies": {
+		"koa": "^2.5.0",
+		"nodemon": "^1.15.1"
+	}
 }
