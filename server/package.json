@@ -1,31 +1,31 @@
 {
-	"name": "koa-firebase-test",
-	"version": "0.1.0",
-	"description": "Testing nodejs and firebase.",
-	"main": "index.js",
+	"name": "server_contracts-conclusion-terms",
+	"version": "0.3.0",
+	"description": "A serverside code of contractsConclusionTerms programm.",
+	"main": "server.js",
 	"scripts": {
-		"dev": "node_modules/.bin/nodemon index.js "
+		"dev": "node_modules/.bin/nodemon server.js "
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/NikolasMelui/koa-firebase-test.git"
+		"url": "git+https://github.com/NikolasMelui/contracts-conclusion-terms.git"
 	},
 	"author": "nikolasmelui",
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/NikolasMelui/koa-firebase-test/issues"
+		"url": "https://github.com/NikolasMelui/contracts-conclusion-terms/issues"
 	},
-	"homepage": "https://github.com/NikolasMelui/koa-firebase-test#readme",
+	"homepage": "https://github.com/NikolasMelui/contracts-conclusion-terms#readme",
 	"dependencies": {
-		"firebase-admin": "^5.9.0",
-		"firebase-functions": "^0.8.1",
+		"koa": "^2.5.0",
 		"koa-body": "^2.5.0",
 		"koa-morgan": "^1.0.1",
 		"koa-router": "^7.4.0",
-		"koa-static": "^4.0.2"
+		"koa-static": "^4.0.2",
+		"firebase-admin": "^5.9.0",
+		"firebase-functions": "^0.8.1"
 	},
 	"devDependencies": {
-		"koa": "^2.5.0",
 		"nodemon": "^1.15.1"
 	}
 }
