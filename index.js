@@ -9,16 +9,35 @@ const port = process.env.PORT || 3001;
 const server = new Koa();
 const router = new Router();
 
-const mainRouter = require('./routers/main.router');
-
 const db = firebaseConnector.firestore();
 
-let docRef = db.collection('users').doc('nikolasmelui');
+db
+	.collection('events')
+	.doc('eventOne')
+	.set({
+		name: 'newEventOne',
+		date: new Date(12, 2, 21),
+	});
 
-var setAda = docRef.set({
-	firstName: 'Nikolas',
-	lastName: 'Melui',
-	born: 1991,
+let response = '';
+
+db
+	.collection('events')
+	.get()
+	.then(snapshot => {
+		snapshot.forEach(doc => {
+			response += `
+      ${doc.data().name}\n
+      ${doc.data().date}
+      `;
+		});
+	})
+	.catch(err => {
+		console.log('Error getting documents', err);
+	});
+
+router.get('/', ctx => {
+	ctx.body = response;
 });
 
 server
