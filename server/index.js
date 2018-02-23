@@ -12,6 +12,8 @@ const router = new Router();
 
 const db = firebaseConnector.firestore();
 
+/* Temporary solution for db insert and read functions
+*/
 db
 	.collection('events')
 	.doc('eventOne')
