@@ -1,7 +1,7 @@
 const firebaseMonthDefine = require('./functions/monthDefine');
 
 module.exports = async (db, collection) => {
-	let response = [];
+	const response = [];
 	await db
 		.collection(collection)
 		.get()
@@ -10,10 +10,10 @@ module.exports = async (db, collection) => {
 				response.push({
 					type: doc.data().type,
 					title: doc.data().title,
-					date: doc.data().startDate,
-					dateString: `${doc.data().startDate.getDate()}  ${firebaseMonthDefine(
-						doc.data().startDate.getMonth()
-					)}  ${doc.data().startDate.getFullYear()} года`,
+					date: doc.data().date,
+					dateString: `${doc.data().date.getDate()}  ${firebaseMonthDefine(
+						doc.data().date.getMonth()
+					)}  ${doc.data().date.getFullYear()} года`,
 				});
 			});
 		})

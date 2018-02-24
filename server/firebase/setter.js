@@ -1,9 +1,9 @@
-module.exports = (db, collection, title, type, startDate) =>
+module.exports = (db, collection, title, type, date) =>
 	db
 		.collection(collection)
 		.doc()
 		.set({
 			title,
 			type,
-			startDate,
+			date,
 		});

@@ -62,19 +62,26 @@
     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
         <v-layout justify-center align-center>
-          <v-flex shrink>
-            <v-card>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0"> {{ message }}</h3>
-                  <div></div>
-                </div>
-              </v-card-title>
-              <v-card-actions>
-                <v-btn flat color="orange">Изменить</v-btn>
-                <v-btn flat color="red">Удалить</v-btn>
-              </v-card-actions>
-            </v-card>
+          <v-flex  shrink>
+            <template v-for="(curEvent, i) in events">
+              <v-card
+              class="v-card"
+              :key="i"
+              >
+                <v-card-title primary-title>
+                  <div>
+                    <h3 class="headline mb-0"> {{ curEvent.title }}</h3>
+                    <div> {{ curEvent.type }} </div>
+                    <div> {{ curEvent.date }} </div>
+                    <div> {{ curEvent.dateString }} </div>
+                  </div>
+                </v-card-title>
+                <v-card-actions>
+                  <v-btn flat color="orange">Изменить</v-btn>
+                  <v-btn flat color="red">Удалить</v-btn>
+                </v-card-actions>
+              </v-card>
+            </template>
           </v-flex>
         </v-layout>
       </v-container>
@@ -88,7 +95,7 @@ import AuthenticationService from '@/services/AuthenticationService';
 export default {
 	name: 'MainTemplate',
 	data: () => ({
-		message: '',
+		events: [],
 		drawer: null,
 		items: [
 			{ message: 'Привет' },
@@ -104,10 +111,8 @@ export default {
 	props: {},
 	methods: {
 		async firebaseGet() {
-			console.log('firebaseGet');
-
 			await AuthenticationService.firebaseGet()
-				.then(res => (this.message = res.data))
+				.then(res => (this.events = res.data))
 				.catch(err => console.log(err));
 		},
 	},
@@ -123,6 +128,9 @@ export default {
 }
 .text {
 	font-weight: 400;
+}
+.v-card {
+	margin-bottom: 20px;
 }
 </style>
 

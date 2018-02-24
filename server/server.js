@@ -7,7 +7,7 @@ const koaStatic = require('koa-static');
 
 const firebaseConnector = require('./firebase/connector');
 const firebaseGet = require('./firebase/getter');
-// const firebaseSet = require('./firebase/setter');lal
+// const firebaseSet = require('./firebase/setter');
 
 const port = process.env.PORT || 3001;
 const server = new Koa();
