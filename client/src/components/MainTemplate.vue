@@ -34,17 +34,27 @@
             v-ripple
             :key="i"
             v-if="item.add"
-            @click="eventAdder = true"
+            @click="eventAdderShow = true"
           >
-          <v-dialog v-model="eventAdder" max-width="700">
+          <v-dialog v-model="eventAdderShow" max-width="700">
               <v-card>
                 <v-card-title align-center class="headline">Создать новое событие</v-card-title>
-                <input v-model="add" placeholder="edit me">
-                <v-date-picker align-center v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                <v-form class="innerForm">
+                  <v-text-field prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
+                  <v-select
+                    :items="selectItems"
+                    v-model="selectItemsModel"
+                    label="Тип проекта:"
+                    single-line
+                    bottom
+                  ></v-select>
+                  <v-date-picker align-center v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                </v-form>
+
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="black darken-1" flat="flat" @click.native="eventAdder = false">Отмена</v-btn>
-                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdder = false">Добавить</v-btn>
+                  <v-btn color="black darken-1" flat="flat" @click.native="eventAdderShow = false">Отмена</v-btn>
+                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdderShow = false">Добавить</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -156,7 +166,17 @@ export default {
 		picker: null,
 		landscape: true,
 		reactive: true,
-		eventAdder: false,
+		eventAdderShow: false,
+		eventAdder: [{}],
+		selectItemsModel: null,
+		selectItems: [
+			{ text: 'Аукцион длинный' },
+			{ text: 'Аукцион короткий' },
+			{ text: 'Конкурс длинный' },
+			{ text: 'Конкурс короткий' },
+			{ text: 'Запрос котировок длинный' },
+			{ text: 'Запрос котировок которкий' },
+		],
 		items: [
 			{ message: 'Привет' },
 			{ heading: 'События' },
@@ -196,5 +216,12 @@ export default {
 }
 .v-card {
 	margin-bottom: 20px;
+}
+.innerForm {
+	width: 80%;
+	margin: auto;
+}
+.picker__body {
+	width: auto !important;
 }
 </style>
