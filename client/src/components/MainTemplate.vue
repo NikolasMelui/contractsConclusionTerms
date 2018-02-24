@@ -33,8 +33,65 @@
           <v-list-tile
             v-ripple
             :key="i"
-            v-else
+            v-if="item.add"
+            @click="eventAdder = true"
+          >
+          <v-dialog v-model="eventAdder" max-width="700">
+              <v-card>
+                <v-card-title align-center class="headline">Создать новое событие</v-card-title>
+                <input v-model="add" placeholder="edit me">
+                <v-date-picker align-center v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="black darken-1" flat="flat" @click.native="eventAdder = false">Отмена</v-btn>
+                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdder = false">Добавить</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title class="grey--text">
+                {{ item.text }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile
+            v-ripple
+            :key="i"
+            v-if="item.refresh"
             @click="firebaseGet"
+          >
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title class="grey--text">
+                {{ item.text }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile
+            v-ripple
+            :key="i"
+            v-if="item.archive"
+            @click=""
+          >
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title class="grey--text">
+                {{ item.text }}
+              </v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile
+            v-ripple
+            :key="i"
+            v-if="item.help"
+            @click=""
           >
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -91,21 +148,24 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService';
-
 export default {
 	name: 'MainTemplate',
 	data: () => ({
 		events: [],
 		drawer: null,
+		picker: null,
+		landscape: true,
+		reactive: true,
+		eventAdder: false,
 		items: [
 			{ message: 'Привет' },
 			{ heading: 'События' },
-			{ icon: 'add', text: 'Добавить' },
-			{ icon: 'refresh', text: 'Обновить' },
+			{ icon: 'add', text: 'Добавить', add: true },
+			{ icon: 'refresh', text: 'Обновить', refresh: true },
 			{ divider: true },
-			{ icon: 'archive', text: 'Архив' },
+			{ icon: 'archive', text: 'Архив', archive: true },
 			{ divider: true },
-			{ icon: 'help', text: 'Как это работает?' },
+			{ icon: 'help', text: 'Как это работает?', help: true },
 		],
 	}),
 	props: {},
@@ -113,6 +173,11 @@ export default {
 		async firebaseGet() {
 			await AuthenticationService.firebaseGet()
 				.then(res => (this.events = res.data))
+				.catch(err => console.log(err));
+		},
+		async firebaseSet() {
+			await AuthenticationService.firebaseSet()
+				.then(res => (this.successSetMessage = res.data))
 				.catch(err => console.log(err));
 		},
 	},
@@ -133,4 +198,3 @@ export default {
 	margin-bottom: 20px;
 }
 </style>
-
