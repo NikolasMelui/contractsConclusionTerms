@@ -14,10 +14,11 @@ const router = new Router();
 
 const db = firebaseConnector.firestore();
 
-firebaseSet(db, 'events', 'firstTweet', 'auction:short', new Date(2018, 2, 21));
+firebaseSet(db, 'events', 'firstTweet', 'auctionShort', new Date(2018, 2, 21));
 const response = firebaseGet(db, 'events');
+
 router.get('/', ctx => {
-	ctx.body = nse;
+	ctx.body = response;
 });
 
 server
