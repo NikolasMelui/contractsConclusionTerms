@@ -3,7 +3,7 @@ module.exports = (db, collection, title, type, startDate) =>
 		.collection(collection)
 		.doc()
 		.set({
-			name: title,
-			type: type,
-			startDate: startDate,
+			title,
+			type,
+			startDate,
 		});

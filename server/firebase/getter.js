@@ -1,20 +1,21 @@
 const firebaseMonthDefine = require('./functions/monthDefine');
-module.exports = (db, collection) => {
+
+module.exports = async (db, collection) => {
 	let response = '';
-	db
+	await db
 		.collection(collection)
 		.get()
 		.then(snapshot => {
 			snapshot.forEach(doc => {
-				response += `
-      ${doc.data().name} => ${doc.data().date.getDate()} ${firebaseMonthDefine(
-					doc.data().date.getMonth()
-				)} ${doc.data().date.getFullYear()} года
-			`;
+				response += `${doc.data().type}\n${
+					doc.data().title
+				} => ${doc.data().startDate.getDate()} ${firebaseMonthDefine(
+					doc.data().startDate.getMonth()
+				)} ${doc.data().startDate.getFullYear()} года\n\n`;
 			});
-			return response;
 		})
 		.catch(err => {
-			console.log('Error getting documents', err);
+			global.console.log('Error getting documents', err);
 		});
+	return response;
 };
