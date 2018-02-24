@@ -6,7 +6,7 @@ const koaStatic = require('koa-static');
 
 const firebaseConnector = require('./firebase/connector');
 const firebaseGet = require('./firebase/getter');
-const firebaseSet = require('./firebase/setter');
+// const firebaseSet = require('./firebase/setter');lal
 
 const port = process.env.PORT || 3001;
 const server = new Koa();
@@ -17,7 +17,7 @@ const db = firebaseConnector.firestore();
 // firebaseSet(db, 'events', 'firstTweet', 'auctionShort', new Date(2018, 2, 21));
 const response = firebaseGet(db, 'events');
 
-router.get('/', async ctx => {
+router.get('/firebaseGet', async ctx => {
 	ctx.body = await response;
 });
 
