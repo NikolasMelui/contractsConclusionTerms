@@ -1,5 +1,5 @@
-module.exports = (db, collection, title, type, date) =>
-	db
+module.exports = async (db, collection, title, type, date) => {
+	await db
 		.collection(collection)
 		.doc()
 		.set({
@@ -7,3 +7,5 @@ module.exports = (db, collection, title, type, date) =>
 			type,
 			date,
 		});
+	return 'Seccuess';
+};

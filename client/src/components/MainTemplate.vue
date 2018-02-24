@@ -11,7 +11,7 @@
         dense
         class="grey lighten-4"
       >
-        <template v-for="(item, i) in items">
+        <template v-for="(item, i) in menu">
           <v-layout
             row
             v-if="item.heading"
@@ -40,21 +40,21 @@
               <v-card>
                 <v-card-title align-center class="headline">Создать новое событие</v-card-title>
                 <v-form class="innerForm">
-                  <v-text-field prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
+                  <v-text-field v-model="formTitleModel" prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
                   <v-select
                     :items="selectItems"
-                    v-model="selectItemsModel"
+                    v-model="formTypeModel"
                     label="Тип проекта:"
                     single-line
                     bottom
                   ></v-select>
-                  <v-date-picker align-center v-model="picker" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                  <v-date-picker align-center v-model="formDateModel" :landscape="landscape" :reactive="reactive"></v-date-picker>
                 </v-form>
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="black darken-1" flat="flat" @click.native="eventAdderShow = false">Отмена</v-btn>
-                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdderShow = false">Добавить</v-btn>
+                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdderShow = false" @click="firebaseSet">Добавить</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -163,12 +163,13 @@ export default {
 	data: () => ({
 		events: [],
 		drawer: null,
-		picker: null,
 		landscape: true,
 		reactive: true,
 		eventAdderShow: false,
+		formTitleModel: '',
+		formTypeModel: '',
+		formDateModel: '',
 		eventAdder: [{}],
-		selectItemsModel: null,
 		selectItems: [
 			{ text: 'Аукцион длинный' },
 			{ text: 'Аукцион короткий' },
@@ -177,7 +178,7 @@ export default {
 			{ text: 'Запрос котировок длинный' },
 			{ text: 'Запрос котировок которкий' },
 		],
-		items: [
+		menu: [
 			{ message: 'Привет' },
 			{ heading: 'События' },
 			{ icon: 'add', text: 'Добавить', add: true },
@@ -196,8 +197,19 @@ export default {
 				.catch(err => console.log(err));
 		},
 		async firebaseSet() {
-			await AuthenticationService.firebaseSet()
-				.then(res => (this.successSetMessage = res.data))
+			// return fetch('http://localhost:3001/firebaseSet', {
+			// 	method: 'POST',
+			// 	body: JSON.stringify({ test: 'test' }),
+			// });
+			await AuthenticationService.firebaseSet({
+				title: this.formTitleModel,
+				type: this.formTypeModel,
+				date: this.formDateModel,
+			})
+				.then((req, res) => {
+					console.log(req.data);
+					console.log(res);
+				})
 				.catch(err => console.log(err));
 		},
 	},

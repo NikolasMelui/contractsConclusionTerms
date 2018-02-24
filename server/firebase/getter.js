@@ -11,9 +11,9 @@ module.exports = async (db, collection) => {
 					type: doc.data().type,
 					title: doc.data().title,
 					date: doc.data().date,
-					dateString: `${doc.data().date.getDate()}  ${firebaseMonthDefine(
+					dateString: `${doc.data().date.getDate()} ${firebaseMonthDefine(
 						doc.data().date.getMonth()
-					)}  ${doc.data().date.getFullYear()} года`,
+					)} ${doc.data().date.getFullYear()} года`,
 				});
 			});
 		})
