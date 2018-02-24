@@ -2,6 +2,7 @@ const Koa = require('koa');
 const logger = require('koa-morgan');
 const Router = require('koa-router');
 // const bodyParser = require('koa-body')();
+const cors = require('koa-cors');
 const koaStatic = require('koa-static');
 
 const firebaseConnector = require('./firebase/connector');
@@ -15,14 +16,14 @@ const router = new Router();
 const db = firebaseConnector.firestore();
 
 // firebaseSet(db, 'events', 'firstTweet', 'auctionShort', new Date(2018, 2, 21));
-const response = firebaseGet(db, 'events');
 
-router.get('/firebaseGet', async ctx => {
-	ctx.body = await response;
+router.post('/firebaseGet', async ctx => {
+	ctx.body = await firebaseGet(db, 'events');
 });
 
 server
 	.use(logger('dev'))
+	.use(cors())
 	.use(koaStatic('public'))
 	.use(router.routes())
 	.listen(port);

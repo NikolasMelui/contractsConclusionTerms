@@ -107,7 +107,7 @@ export default {
 			console.log('firebaseGet');
 
 			await AuthenticationService.firebaseGet()
-				.then(res => (this.message = res))
+				.then(res => (this.message = res.data))
 				.catch(err => console.log(err));
 		},
 	},
