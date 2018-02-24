@@ -1,8 +1,9 @@
 {
 	"name": "server_contracts-conclusion-terms",
 	"version": "0.3.0",
-	"description": "A serverside code of contractsConclusionTerms programm.",
-	"main": "server.js",
+	"description": "A serverside code of contractsConclusionTerms program.",
+	"author": "NikolasMelui <slak@samaradom.ru>",
+	"private": true,
 	"scripts": {
 		"dev": "node_modules/.bin/nodemon server.js "
 	},
@@ -10,7 +11,6 @@
 		"type": "git",
 		"url": "git+https://github.com/NikolasMelui/contracts-conclusion-terms.git"
 	},
-	"author": "nikolasmelui",
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/NikolasMelui/contracts-conclusion-terms/issues"
