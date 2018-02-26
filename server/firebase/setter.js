@@ -1,4 +1,4 @@
-module.exports = async (db, collection, title, type, date) => {
+module.exports = async (db, collection, title, type, date, dateString) => {
 	await db
 		.collection(collection)
 		.doc()
@@ -6,6 +6,7 @@ module.exports = async (db, collection, title, type, date) => {
 			title,
 			type,
 			date,
+			dateString,
 		});
-	return 'Seccuess';
+	return 'Success';
 };

@@ -139,13 +139,12 @@
                   <div>
                     <h3 class="headline mb-0"> {{ curEvent.title }}</h3>
                     <div> {{ curEvent.type }} </div>
-                    <div> {{ curEvent.date }} </div>
                     <div> {{ curEvent.dateString }} </div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
                   <v-btn flat color="orange">Изменить</v-btn>
-                  <v-btn flat color="red">Удалить</v-btn>
+                  <v-btn flat color="red">В архив</v-btn>
                 </v-card-actions>
               </v-card>
             </template>
@@ -201,6 +200,7 @@ export default {
 				title: this.formTitleModel,
 				type: this.formTypeModel,
 				date: this.formDateModel,
+				dateString: this.formDateModel,
 			})
 				.then((req, res) => {
 					console.log(req.data);
