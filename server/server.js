@@ -34,7 +34,7 @@ router.post('/actualeventsset', requestValidator, async ctx => {
 });
 
 router.post('/actualeventsget', async ctx => {
-	ctx.body = await actualEventsGet(db, 'events');
+	ctx.body = await actualEventsGet(db, 'actualEvents');
 });
 
 server.listen(port);
