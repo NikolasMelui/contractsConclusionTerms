@@ -55,7 +55,7 @@
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="black darken-1" flat="flat" @click.native="eventAdderShow = false">Отмена</v-btn>
-                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdderShow = false" @click="firebaseSet">Добавить</v-btn>
+                  <v-btn color="green darken-1" flat="flat" @click.native="eventAdderShow = false" @click="actualEventsSet">Добавить</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -72,7 +72,7 @@
             v-ripple
             :key="i"
             v-if="item.refresh"
-            @click="firebaseGet"
+            @click="actualEventsGet"
           >
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -190,13 +190,13 @@ export default {
 	}),
 	props: {},
 	methods: {
-		async firebaseGet() {
-			await AuthenticationService.firebaseGet()
+		async actualEventsGet() {
+			await AuthenticationService.actualEventsGet()
 				.then(res => (this.events = res.data))
 				.catch(err => console.log(err));
 		},
-		async firebaseSet() {
-			await AuthenticationService.firebaseSet({
+		async actualEventsSet() {
+			await AuthenticationService.actualEventsSet({
 				title: this.eventTitleFormModel,
 				type: this.eventTypeFormModel,
 				procurementPlanDate: this.eventProcurementPlanDateFormModel,

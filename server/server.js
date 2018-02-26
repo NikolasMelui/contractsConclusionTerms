@@ -4,9 +4,9 @@ const Router = require('koa-router');
 const cors = require('koa-cors');
 const koaStatic = require('koa-static');
 
-const firebaseConnector = require('./firebase/connector');
-const firebaseGet = require('./firebase/getter');
-const firebaseSet = require('./firebase/setter');
+const firebaseConnector = require('./firebase/firebaseConnector');
+const actualEventsGet = require('./firebase/actualEventsGetter');
+const actualEventsSet = require('./firebase/actualEventsSetter');
 const requestValidator = require('./firebase/requestValidator');
 
 const port = process.env.PORT || 3001;
@@ -23,18 +23,18 @@ server
 	.use(router.allowedMethods())
 	.use(router.routes());
 
-router.post('/firebaseSet', requestValidator, async ctx => {
-	ctx.body = await firebaseSet(
+router.post('/actualeventsset', requestValidator, async ctx => {
+	ctx.body = await actualEventsSet(
 		db,
-		'events',
+		'actualEvents',
 		ctx.request.body.title,
 		ctx.request.body.type,
 		ctx.request.body.procurementPlanDate
 	);
 });
 
-router.post('/firebaseGet', async ctx => {
-	ctx.body = await firebaseGet(db, 'events');
+router.post('/actualeventsget', async ctx => {
+	ctx.body = await actualEventsGet(db, 'events');
 });
 
 server.listen(port);

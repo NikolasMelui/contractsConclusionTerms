@@ -2,10 +2,10 @@ import Api from '@/services/Api';
 // import qs from 'qs';
 
 export default {
-  firebaseGet() {
-    return Api().post('firebaseGet');
+  actualEventsGet() {
+    return Api().post('actualeventsget');
   },
-  firebaseSet(credentials) {
-    return Api().post('firebaseSet', credentials);
+  actualEventsSet(credentials) {
+    return Api().post('actualeventsset', credentials);
   },
 };
