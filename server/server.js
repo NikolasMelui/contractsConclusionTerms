@@ -1,7 +1,6 @@
 const Koa = require('koa');
 const logger = require('koa-morgan');
 const Router = require('koa-router');
-// const bodyParser = require('koa-body')();
 const cors = require('koa-cors');
 const koaStatic = require('koa-static');
 
@@ -15,22 +14,26 @@ const router = new Router();
 
 const db = firebaseConnector.firestore();
 
-router.post(
-	'/firebaseSet',
-	// global.console.log(this.title);
-	// ctx.body = 'Hello!';
-	firebaseSet()
+server
+	.use(logger('dev'))
+	.use(require('koa-body')())
+	.use(cors())
+	.use(koaStatic('public'))
+	.use(router.allowedMethods())
+	.use(router.routes());
 
-	// firebaseSet(db, 'events', req.body.title, req.body.type, req.body.date);
-);
+let tmp = {};
+
+router.post('/firebaseSet', async ctx => {
+	tmp = ctx.request.body;
+	await firebaseSet(db, 'events', tmp.title, tmp.type, tmp.date);
+	ctx.body = 'Response';
+});
+
+global.console.log(tmp.title);
 
 router.post('/firebaseGet', async ctx => {
 	ctx.body = await firebaseGet(db, 'events');
 });
 
-server
-	.use(logger('dev'))
-	.use(cors())
-	.use(koaStatic('public'))
-	.use(router.routes())
-	.listen(port);
+server.listen(port);

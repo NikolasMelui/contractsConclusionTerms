@@ -197,10 +197,6 @@ export default {
 				.catch(err => console.log(err));
 		},
 		async firebaseSet() {
-			// return fetch('http://localhost:3001/firebaseSet', {
-			// 	method: 'POST',
-			// 	body: JSON.stringify({ test: 'test' }),
-			// });
 			await AuthenticationService.firebaseSet({
 				title: this.formTitleModel,
 				type: this.formTypeModel,
@@ -208,7 +204,7 @@ export default {
 			})
 				.then((req, res) => {
 					console.log(req.data);
-					console.log(res);
+					console.log(res.data);
 				})
 				.catch(err => console.log(err));
 		},
