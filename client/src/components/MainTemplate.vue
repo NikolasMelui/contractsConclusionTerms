@@ -11,7 +11,7 @@
         dense
         class="grey lighten-4"
       >
-        <template v-for="(item, i) in menu">
+        <template v-for="(item, i) in menuItems">
           <v-layout
             row
             v-if="item.heading"
@@ -40,16 +40,16 @@
               <v-card>
                 <v-card-title align-center class="headline">Создать новое событие</v-card-title>
                 <v-form ref="eventCreateForm" class="innerForm">
-                  <v-text-field required v-model="formTitleModel" prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
+                  <v-text-field required v-model="eventTitleFormModel" prepend-icon="subtitles" name="eventTitle" label="Название проекта" type="text"></v-text-field>
                   <v-select
                     required
-                    :items="selectItems"
-                    v-model="formTypeModel"
+                    :items="eventTypesItems"
+                    v-model="eventTypeFormModel"
                     label="Тип проекта:"
                     single-line
                     bottom
                   ></v-select>
-                  <v-date-picker required align-center v-model="formDateModel" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                  <v-date-picker required align-center v-model="eventProcurementPlanDateFormModel" :landscape="landscape" :reactive="reactive"></v-date-picker>
                 </v-form>
 
                 <v-card-actions>
@@ -140,7 +140,7 @@
                   <div>
                     <h3 class="headline mb-0"> {{ curEvent.title }}</h3>
                     <div> {{ curEvent.type }} </div>
-                    <div> {{ curEvent.dateString }} </div>
+                    <div> {{ curEvent.procurementPlanDate}} </div>
                   </div>
                 </v-card-title>
                 <v-card-actions>
@@ -166,11 +166,10 @@ export default {
 		landscape: true,
 		reactive: true,
 		eventAdderShow: false,
-		formTitleModel: '',
-		formTypeModel: '',
-		formDateModel: '',
-		eventAdder: [{}],
-		selectItems: [
+		eventTitleFormModel: '',
+		eventTypeFormModel: '',
+		eventProcurementPlanDateFormModel: '',
+		eventTypesItems: [
 			{ text: 'Аукцион длинный' },
 			{ text: 'Аукцион короткий' },
 			{ text: 'Конкурс длинный' },
@@ -178,7 +177,7 @@ export default {
 			{ text: 'Запрос котировок длинный' },
 			{ text: 'Запрос котировок которкий' },
 		],
-		menu: [
+		menuItems: [
 			{ message: 'Привет' },
 			{ heading: 'События' },
 			{ icon: 'add', text: 'Добавить', add: true },
@@ -198,15 +197,14 @@ export default {
 		},
 		async firebaseSet() {
 			await AuthenticationService.firebaseSet({
-				title: this.formTitleModel,
-				type: this.formTypeModel,
-				date: this.formDateModel,
-				dateString: this.formDateModel,
+				title: this.eventTitleFormModel,
+				type: this.eventTypeFormModel,
+				procurementPlanDate: this.eventProcurementPlanDateFormModel,
 			})
 				.then((req, res) => {
-					this.formTitleModel = '';
-					this.formTypeModel = '';
-					this.formDateModel = '';
+					this.eventTitleFormModel = '';
+					this.eventTypeFormModel = '';
+					this.eventDateFormModel = '';
 					console.log(req.data);
 					console.log(res.data);
 				})

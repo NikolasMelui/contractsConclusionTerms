@@ -1,12 +1,11 @@
-module.exports = async (db, collection, title, type, date, dateString) => {
+module.exports = async (db, collection, title, type, procurementPlanDate) => {
 	await db
 		.collection(collection)
 		.doc()
 		.set({
 			title,
 			type,
-			date,
-			dateString,
+			procurementPlanDate,
 		});
 	return 'Success';
 };

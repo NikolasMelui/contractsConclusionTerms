@@ -8,8 +8,7 @@ module.exports = async (db, collection) => {
 				response.push({
 					type: doc.data().type,
 					title: doc.data().title,
-					date: doc.data().date,
-					dateString: doc.data().dateString,
+					procurementPlanDate: doc.data().procurementPlanDate,
 				});
 			});
 		})

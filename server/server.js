@@ -29,8 +29,7 @@ router.post('/firebaseSet', requestValidator, async ctx => {
 		'events',
 		ctx.request.body.title,
 		ctx.request.body.type,
-		ctx.request.body.date,
-		ctx.request.body.dateString
+		ctx.request.body.procurementPlanDate
 	);
 });
 
