@@ -39,16 +39,17 @@
           <v-dialog v-model="eventAdderShow" max-width="700">
               <v-card>
                 <v-card-title align-center class="headline">Создать новое событие</v-card-title>
-                <v-form class="innerForm">
-                  <v-text-field v-model="formTitleModel" prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
+                <v-form ref="eventCreateForm" class="innerForm">
+                  <v-text-field required v-model="formTitleModel" prepend-icon="subtitles" name="title" label="Название проекта" type="text"></v-text-field>
                   <v-select
+                    required
                     :items="selectItems"
                     v-model="formTypeModel"
                     label="Тип проекта:"
                     single-line
                     bottom
                   ></v-select>
-                  <v-date-picker align-center v-model="formDateModel" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                  <v-date-picker required align-center v-model="formDateModel" :landscape="landscape" :reactive="reactive"></v-date-picker>
                 </v-form>
 
                 <v-card-actions>
@@ -203,6 +204,9 @@ export default {
 				dateString: this.formDateModel,
 			})
 				.then((req, res) => {
+					this.formTitleModel = '';
+					this.formTypeModel = '';
+					this.formDateModel = '';
 					console.log(req.data);
 					console.log(res.data);
 				})
