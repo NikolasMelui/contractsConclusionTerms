@@ -15,16 +15,14 @@ const router = new Router();
 
 const db = firebaseConnector.firestore();
 
-router.post('/firebaseSet', async (ctx, next) => {
-	ctx.user = 'user';
-	global.console.log(ctx.body);
-	next();
+router.post(
+	'/firebaseSet',
 	// global.console.log(this.title);
 	// ctx.body = 'Hello!';
-	// await firebaseSet(db, 'events', this.title, this.type, this.date);
+	firebaseSet()
 
 	// firebaseSet(db, 'events', req.body.title, req.body.type, req.body.date);
-});
+);
 
 router.post('/firebaseGet', async ctx => {
 	ctx.body = await firebaseGet(db, 'events');
