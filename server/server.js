@@ -22,15 +22,9 @@ server
 	.use(router.allowedMethods())
 	.use(router.routes());
 
-let tmp = {};
-
 router.post('/firebaseSet', async ctx => {
-	tmp = ctx.request.body;
-	await firebaseSet(db, 'events', tmp.title, tmp.type, tmp.date);
-	ctx.body = 'Response';
+	ctx.body = await firebaseSet(db, 'events', ctx.body.title, ctx.body.type, ctx.body.date);
 });
-
-global.console.log(tmp.title);
 
 router.post('/firebaseGet', async ctx => {
 	ctx.body = await firebaseGet(db, 'events');
