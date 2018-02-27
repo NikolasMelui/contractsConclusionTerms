@@ -2,10 +2,10 @@ import Api from '@/services/Api';
 // import qs from 'qs';
 
 export default {
-  actualEventsGet() {
-    return Api().post('actualeventsget');
+  getEvents() {
+    return Api().post('/getevents');
   },
-  actualEventsSet(credentials) {
-    return Api().post('actualeventsset', credentials);
+  pushEvent(credentials) {
+    return Api().post('/pushevent', credentials);
   },
 };
