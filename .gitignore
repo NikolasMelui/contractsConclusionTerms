@@ -58,5 +58,5 @@ typings/
 .env
 
 # config file
-config.js
+config.json
 
